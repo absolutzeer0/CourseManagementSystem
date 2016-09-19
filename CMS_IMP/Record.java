@@ -9,7 +9,20 @@ public class Record {
 	private Course course;
 	private Instructor instructor;
 	
-	//Constructor
+	//Constructors
+	public Record(Course course,
+					Instructor inst,
+					char grade,
+					String... comments){
+		setCourse(course);
+		setInstructor(inst);
+		setLetterGrade(grade);
+		
+		for (String comment:comments){
+			addComment(comment);
+		}
+	}
+	
 	public Record(Course course, 
 					char grade,  
 					boolean isCurrent, 

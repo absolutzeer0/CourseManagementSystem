@@ -4,20 +4,26 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class CMS_IMP {
+	
+	static StatTracker tracker = new StatTracker();
+	
+	static ArrayList<String> filenames = new ArrayList<String>();
+	static ArrayList<Scanner> scanners = new ArrayList<Scanner>();
+	
+	static ArrayList<Student> students = new ArrayList<Student>();
+	static ArrayList<Instructor> instructors = new ArrayList<Instructor>();
+	static ArrayList<Course> courses = new ArrayList<Course>();
+	static ArrayList<Record> records = new ArrayList<Record>();
 
 	public static void main(String[] args) {
 		
-		ArrayList<String> filenames = new ArrayList<String>();
-		ArrayList<Scanner> scanners = new ArrayList<Scanner>();
 		filenames.add("students.csv");
 		filenames.add("instructors.csv");
 		filenames.add("courses.csv");
 		filenames.add("records.csv");
-		
-		ArrayList<Student> students = new ArrayList<Student>();
-		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
-		ArrayList<Course> courses = new ArrayList<Course>();
-		ArrayList<Record> records = new ArrayList<Record>();
+		Student foundStudent = new Student();
+		Course foundCourse = new Course();
+		Instructor foundInstructor = new Instructor();
 		
 		/**
 		 * Read information from files and handle according to what 
@@ -38,19 +44,28 @@ public class CMS_IMP {
 						//students
 						case 0: Student saveStudent = new Student(tokens);
 								students.add(saveStudent);
+								
+								//Update the statistics tracker
+								tracker.setStudentCt(tracker.getStudentCt()+1);
 								break;
 						//instructors
 						case 1: Instructor saveInst = new Instructor(tokens);
 								instructors.add(saveInst);
+								
+								//Update the statistics tracker
+								tracker.setInstructorCt(tracker.getInstructorCt()+1);
 								break;
 						//courses
 						case 2: Course saveCourse = new Course(tokens);
 								courses.add(saveCourse);
+								
+								//Update the statistics tracker
+								tracker.setCourseCt(tracker.getCourseCt()+1);
 								break;
 						//records
 						case 3: for (Student student:students){
-									if (student.getUUID() == tokens[0]){
-										Student foundStudent = student;
+									if (student.getUUID().equals(tokens[0])){
+										foundStudent = student;
 										break;
 									}
 									else{
@@ -59,8 +74,8 @@ public class CMS_IMP {
 								}
 						
 								for (Course course:courses){
-									if (course.getCourseID() == tokens[1]){
-										Course foundcourse = course;
+									if (course.getCourseID().equals(tokens[1])){
+										foundCourse = course;
 										break;
 									}
 									else{
@@ -69,24 +84,26 @@ public class CMS_IMP {
 								}
 								
 								for (Instructor instr:instructors){
-									if (instr.getUUID() == tokens[2]){
-										Instructor foundInstructor = instr;
+									if (instr.getUUID().equals(tokens[2])){
+										foundInstructor = instr;
+										break;
 									}
 									else{
 										// TODO return instructor not found
 									}
 								}
 								
-								Record saveRecord = new Record(foundCourse,);
+								Record saveRecord = new Record(foundCourse,
+										foundInstructor,tokens[4].charAt(0),tokens[3]);
 								
+								foundStudent.addRecord(saveRecord);
+								
+								//Update the statistics tracker
+								tracker.setRecordCt(tracker.getRecordCt()+1);
 								break;
 						default:
 								break;
 					}
-					System.out.println(tokens[0]);
-					System.out.println(tokens[1]);
-					System.out.println(tokens[2]);
-					
 				}
 				scanners.get(i).close();
 				
@@ -94,15 +111,8 @@ public class CMS_IMP {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		
-		
-	
-		
-		
-		
-
+		}	
 	}
-
+	
+	//Helper Methods
 }
