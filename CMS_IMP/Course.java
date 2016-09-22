@@ -58,12 +58,20 @@ public class Course {
 		this.numSeats++;
 	}
 	
+	public int countStudents(){
+		return enrolledStudents.size();
+	}
+	
 	public void addSemester(String s){
 		semesterList.add(s);
 	}
 	
 	public void removeSemester(String s){
 		semesterList.remove(s);
+	}
+	
+	public ArrayList<String> getSemesterList(){
+		return semesterList;
 	}
 	
 	public void addPastInstructor(Instructor i){
@@ -73,7 +81,14 @@ public class Course {
 	public void removePastInstructor(Instructor i){
 		pastInstructors.remove(i);
 	}
+	
+	public int countPastInstructors(){
+		return pastInstructors.size();
+	}
 
+	public ArrayList<Instructor> getPastInstructors(){
+		return pastInstructors;
+	}
 	
 	//Getters and setters
 	public String getCourseID() {

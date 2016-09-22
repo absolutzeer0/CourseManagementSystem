@@ -29,14 +29,13 @@ public class Student extends Person{
 		
 	}
 	
-	public boolean addCurrentCourse(Course c){
-		if (this.program.courseList.contains(c)){
+	public void addCurrentCourse(Course c){
+		//if (this.program.courseList.contains(c)){
 			currentCourses.add(c);
-			return true;
-		}
-		else{
-			return false;
-		}
+		//}
+		//else{
+		//	return false;
+		//}
 		
 	}
 	
@@ -48,6 +47,10 @@ public class Student extends Person{
 		else{
 			return false;
 		}
+	}
+	
+	public int countCurrentCourses(){
+		return currentCourses.size();
 	}
 	
 	public void addPastCourse(Course c){
@@ -62,6 +65,10 @@ public class Student extends Person{
 		else{
 			return false;
 		}
+	}
+	
+	public int countPastCourses(){
+		return pastCourses.size();
 	}
 	
 	public void addRecord(Record r){

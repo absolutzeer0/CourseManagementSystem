@@ -31,6 +31,20 @@ public class StatTracker {
 		setCourseSummerCt(0);
 	}
 	
+	//Methods
+	void printDigestFormat(){
+		System.out.println(getRecordCt());
+		System.out.println(getStudentCt());
+		System.out.println(getStudentNoClassCt());
+		System.out.println(getInstructorCt());
+		System.out.println(getInstructorNoTeachCt());
+		System.out.println(getCourseCt());
+		System.out.println(getCourseNoStudentCt());
+		System.out.println(getCourseFallCt());
+		System.out.println(getCourseSpringCt());
+		System.out.println(getCourseSummerCt());
+	}
+	
 	
 	//Getters and setters
 	public int getRecordCt() {
